@@ -10,9 +10,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  build: {
-    rollupOptions: {
-      external: ['@material-ui/core']
-    }
+  optimizeDeps: {
+    include: ['@material-ui/core', '@material-ui/icons']
   }
 });
