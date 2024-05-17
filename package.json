@@ -19,7 +19,6 @@
     "@mui/lab": "^5.0.0-alpha.170",
     "@mui/material": "^5.15.18",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
-    "@mui/styles": "^5.15.18",
     "@mui/x-date-pickers": "^7.5.0",
     "autoprefixer": "^10.4.19",
     "dayjs": "^1.11.11",
