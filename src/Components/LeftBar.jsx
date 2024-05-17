@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Container from '@mui/material/Container'
 import Button from '@mui/material/Button';
 import {makeStyles} from '@material-ui/core'
-import {Typography} from '@mui/material';
+import Typography from '@mui/material/Typography';
 import {Link} from 'react-router-dom'
 
 

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
-import { makeStyles, Modal} from '@material-ui/core';
-import { Typography } from '@mui/material';
+import {makeStyles} from '@material-ui/core'
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 import StartDate from './StartDate';
 import Container from '@mui/material/Container';
 import DragDrop from './DragDrop';

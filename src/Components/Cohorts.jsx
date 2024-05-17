@@ -1,9 +1,10 @@
 import React from 'react'
 import Button from '@mui/material/Button';
-import {makeStyles,alpha,CardContent} from '@material-ui/core'
-import {Typography} from '@mui/material';
+import { alpha } from '@mui/material/styles';
+import CardContent from '@mui/material/CardContent';
+import {makeStyles} from '@material-ui/core'
+import Typography from '@mui/material/Typography'
 import NavBar from './NavBar'
-import MidBar from './MidBar'
 import Card from '@mui/material/Card';
 import { useState } from 'react';
 import { Search } from '@mui/icons-material';
