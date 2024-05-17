@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
   downarrow: {
     marginRight: 3,
+    height: "40px",
     color: "grey",
     [theme.breakpoints.down("sm")]: {
       display: "none"
@@ -62,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
   apps: {
     fontSize: "50px",
+    height: "40px",
     [theme.breakpoints.down("sm")]: {
       display: "none"
     }
@@ -109,10 +111,10 @@ const NavBar = () => {
               <Typography sx={{ marginRight: 1 }} className={classes.name}>Onowomano</Typography>
             </Grid>
             <Grid item>
-              <Button><KeyboardArrowDownIcon className={classes.downarrow} /></Button>
+              <Button className={classes.downarrow}><KeyboardArrowDownIcon  /></Button>
             </Grid>
             <Grid item>
-              <Button><AppsIcon color='primary' className={classes.apps} /></Button>
+              <Button ><AppsIcon color='primary' sx={{fontSize:40}} /></Button>
             </Grid>
           </Grid>
         </div>

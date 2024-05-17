@@ -142,7 +142,9 @@ const Cohorts = () => {
   function renderCohorts() {
     return CohortList.map((cohort, index) => (
       <Card  key={index} 
-      sx={{marginBottom:4,boxShadow: "0 8px 16px 0px rgba(240, 249, 255, 0.5)",borderRadius:"8px",border:"1px #F6FCFF"}}>
+          sx={{marginBottom:4,
+          boxShadow: "0 8px 16px 0px rgba(240, 249, 255, 0.5)",
+          borderRadius:"8px",border:"1px #F6FCFF"}}>
         <CardContent className={classes.cardcover}>
          
           <div className={classes.firstChild}>

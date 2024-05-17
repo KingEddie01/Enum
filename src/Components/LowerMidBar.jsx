@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     paddingTop: theme.spacing(30),
-    paddingLeft: theme.spacing(40)
+    paddingLeft: theme.spacing(50)
   },
   sleeping: {
     width: "40%",
