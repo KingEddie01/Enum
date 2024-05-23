@@ -13,9 +13,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     gap: 15,
-    [theme.breakpoints.down("sm")]: {
-      display: "none"
-    }
+    
   },
   thirdcomp: {
     display: "flex",
@@ -28,28 +26,12 @@ const useStyles = makeStyles((theme) => ({
   },
   bell: {
     height: "40px",
-    [theme.breakpoints.down("sm")]: {
-      display: "none"
-    }
-  },
-  singleLogo: {
-    [theme.breakpoints.up("sm")]: {
-      display: "none"
-    }
-  },
-  doubleLogo: {
-    [theme.breakpoints.down("sm")]: {
-      display: "none"
-    }
+    
   },
   user: {
     height: "40px"
   },
-  bellSingle: {
-    [theme.breakpoints.up("sm")]: {
-      display: "none"
-    }
-  },
+  
   name: {
     [theme.breakpoints.down("sm")]: {
       display: "none"
@@ -66,9 +48,7 @@ const useStyles = makeStyles((theme) => ({
   apps: {
     fontSize: "50px",
     height: "40px",
-    [theme.breakpoints.down("sm")]: {
-      display: "none"
-    }
+   
   }
 }));
 
@@ -77,8 +57,7 @@ const NavBar = () => {
   return (
     <AppBar position='fixed' color='default' sx={{ paddingLeft: 10, paddingRight: 7 }} >
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        <img src='src/assets/Group 13149.png' alt='onlylogo' className={classes.singleLogo} />
-        <img src='/src/assets/logo.png' alt='logo' className={classes.doubleLogo} />
+       <img src='/src/assets/logo.png' alt='logo' className={classes.doubleLogo} />
 
         <div className={classes.midcomp}>
           <Link to={"/"}>
@@ -102,7 +81,7 @@ const NavBar = () => {
         <div className={classes.thirdcomp}>
           <Button>
             <img src='src/assets/Group 48097083.png' alt='notification' className={classes.bell} />
-            <img src='src/assets/notification.png' alt='bell' className={classes.bellSingle} />
+            
           </Button>
           <Button>
             <img src='src/assets/Ellipse 131.png' alt='user' className={classes.user} />
