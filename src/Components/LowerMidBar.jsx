@@ -6,6 +6,8 @@ import Modal from '@mui/material/Modal';
 import StartDate from './StartDate';
 import Container from '@mui/material/Container';
 import DragDrop from './DragDrop';
+import {useSelector,useDispatch} from 'react-redux';
+import { createCohort } from '../Slice/userSlice';
 
 const useStyles = makeStyles((theme) => ({
   sleepingCloud: {
@@ -39,6 +41,12 @@ const useStyles = makeStyles((theme) => ({
   last: {
     justifyContent: "space-between"
   },
+  createCohortButton: {
+    boxShadow: 'none', // Remove box shadow
+    '&:hover': {
+      boxShadow: 'none', // Remove box shadow on hover
+    }
+  }
 }));
 
 const LowerMidBar = () => {
@@ -52,8 +60,26 @@ const LowerMidBar = () => {
   const [fileUploaded, setFileUploaded] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
 
+  const user = useSelector((state)=>state.user);
+  const dispatch = useDispatch();
+
+ 
+
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
+  const handleClose = () => {
+    setOpen(false);
+    resetForm();
+  };
+
+  const resetForm = () => {
+    setCohortName('');
+    setDescription('');
+    setProgram('');
+    setStartDate(null);
+    setEndDate(null);
+    setFileUploaded(false);
+  };
 
   useEffect(() => {
     if (cohortName && description && program && startDate && endDate && fileUploaded) {
@@ -68,7 +94,7 @@ const LowerMidBar = () => {
       <div className={classes.sleepingCloud}>
         <img src='src/assets/Group 598.png' alt='sleeping-Cloud' className={classes.sleeping} />
         <img src='src/assets/Frame 48097982.png' alt='emptyspace' className={classes.sleeping1} />
-        <Button onClick={handleOpen}>
+        <Button className={classes.createCohortButton} onClick={handleOpen}>
           <img src='src/assets/Button.png' alt='button' />
         </Button>
       </div>
@@ -99,7 +125,8 @@ const LowerMidBar = () => {
                 placeholder='Ex. Cohort 1'
                 value={cohortName}
                 onChange={(e) => setCohortName(e.target.value)}
-                style={{ padding: '12px', borderRadius: '5px', borderWidth: "1px" }} />
+                style={{ padding: '12px', borderRadius: '5px', borderWidth: "1px" }}
+                />
             </div>
             <div className={classes.item}>
               <label>Description</label>
@@ -137,7 +164,9 @@ const LowerMidBar = () => {
             </div>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Button variant="outlined" onClick={handleClose}>Cancel</Button>
-              <Button variant="contained" disabled={!isFormValid} sx={{ marginLeft: 2 }}> Create Cohort</Button>
+              <Button variant="contained" 
+              disabled={!isFormValid} 
+              sx={{ marginLeft: 2}}> Create Cohort</Button>
             </div>
           </form>
         </Container>
