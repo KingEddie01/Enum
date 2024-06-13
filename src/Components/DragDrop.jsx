@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core';
 import Typography from '@mui/material/Typography';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import ImageIcon from '@mui/icons-material/Image'; 
 
 const useStyles = makeStyles((theme) => ({
   dropzone: {
@@ -49,6 +50,16 @@ const useStyles = makeStyles((theme) => ({
     objectFit: 'cover',
     borderRadius: '50%',
   },
+  placeholderIcon: {
+    width: '100px',
+    height: '100px',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: theme.palette.grey[200],
+    color: theme.palette.grey[500],
+  },
 }));
 
 const DragDrop = ({ onFileUpload }) => {
@@ -80,7 +91,7 @@ const DragDrop = ({ onFileUpload }) => {
     const reader = new FileReader();
     reader.onloadend = () => {
       setImage(reader.result);
-      onFileUpload(true); // Notify parent component about file upload
+      onFileUpload(reader.result); 
     };
     reader.readAsDataURL(file);
   };
@@ -102,18 +113,9 @@ const DragDrop = ({ onFileUpload }) => {
         {image ? (
           <img src={image} alt="Uploaded" className={classes.previewImage} />
         ) : (
-          <svg
-            className={classes.icon}
-            viewBox="0 0 20 16"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-          >
-            <path d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"></path>
-          </svg>
+          <div className={classes.placeholderIcon}>
+            <ImageIcon style={{ fontSize: 50 }} />
+          </div>
         )}
         <div>
           <p className={classes.text1}>Drag and drop or <span className={classes.span}>choose file</span></p>

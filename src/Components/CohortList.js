@@ -1,45 +1,53 @@
 const Cohorts = [
   {
-    image:"src/assets/Cohort1.png",
+    fileUploaded:"src/assets/Cohort1.png",
     cohortName: "Cohort 1",
-    department:"Product Design",
-    numberOflearners:"25",
-    createdDate : "2nd Jan 2021"
+    program:"Product Design",
+    description:'software engineering',
+    startDate : "2nd Jan 2021",
+    endDate: "12th June  2022"
+
   },
   {
-    image:"src/assets/Cohort2.png",
+    fileUploaded:"src/assets/Cohort2.png",
     cohortName: "Cohort 2",
-    department:"Techpreneurs...",
-    numberOflearners:"25",
-    createdDate : "2nd Jan 2021"
+    description:'software engineering',
+    program:"Techpreneurs...",
+    startDate: "2nd Jan 2021",
+    endDate: "12th June  2022"
   },
   {
-    image:"src/assets/Cohort3.png",
+    fileUploaded:"src/assets/Cohort3.png",
     cohortName: "Cohort 3",
-    department:"Creative Design",
-    numberOflearners:"25",
-    createdDate : "2nd Jan 2021"
+    description:'software engineering',
+    program:"Creative Design",
+    startDate : "2nd Jan 2021",
+    endDate: "12th June  2022"
   },
   {
-    image:"src/assets/Cohort4.png",
+    fileUploaded:"src/assets/Cohort4.png",
     cohortName: "Cohort 4",
-    department:"Dev-ops",
-    numberOflearners:"25",
-    createdDate : "2nd Jan 2021"
+    program:"Dev-ops",
+    description:'software engineering',
+    startDate : "2nd Jan 2021",
+    endDate: "12th June  2022"
   },
   {
-    image:"src/assets/Cohort5.png",
+    fileUploaded:"src/assets/Cohort5.png",
     cohortName: "Cohort 5",
-    department:"UX Writer",
-    numberOflearners:"25",
-    createdDate : "2nd Jan 2021"
+    program:"UX Writer",
+    description:'software engineering',
+    startDate : "2nd Jan 2021",
+    endDate: "12th June  2022"
   },
   {
-    image:"src/assets/Cohort6.png",
+    fileUploaded:"src/assets/Cohort6.png",
     cohortName: "Cohort 6",
-    department:"Software Engi..",
-    numberOflearners:"25",
-    createdDate : "2nd Jan 2021"
+    program:"Software Engi..",
+    description:'software engineering',
+    startDate : "2nd Jan 2021",
+    endDate: "12th June  2022"
+
   }
 ]
 export default Cohorts;
