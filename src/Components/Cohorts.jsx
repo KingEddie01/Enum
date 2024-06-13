@@ -15,14 +15,19 @@ import StartDate from './StartDate';
 import DragDrop from './DragDrop';
 import InputBase from '@mui/material/InputBase';
 import CohortMenu from './CohortMenu';
-import { format } from 'date-fns'; 
+import { format } from 'date-fns';
 import ImageIcon from '@mui/icons-material/Image';
-
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import Popover from '@mui/material/Popover';
+import MenuItem from '@mui/material/MenuItem';
+import LeftBar from './LeftBar';
+import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   find: {
     display: 'flex',
     alignItems: 'center',
+    marginTop:theme.spacing(10),
     position: 'relative',
     borderRadius: 10,
     borderStyle: 'solid',
@@ -84,15 +89,29 @@ const useStyles = makeStyles((theme) => ({
   },
   cardcover: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent:'space-between'
+    
+    
   },
   firstChild: {
     display: 'flex',
     gap: 20,
+    marginLeft:'20%'
   },
   secondChild: {
     display: 'flex',
     gap: 40,
+  },
+  
+  home:{
+    marginTop: theme.spacing(5)
+  },
+  image:{
+    marginRight:theme.spacing(2)
+  },
+  home1:{
+    display:"flex",
+    gap:120
   },
   thirdChild: {
     display: 'grid',
@@ -115,9 +134,12 @@ const useStyles = makeStyles((theme) => ({
     gap: 7,
   },
   createCohortButton: {
-    boxShadow: 'none', 
+    width:'200px',
+    height:'50px',
+    borderRadius:"200px",
+    boxShadow: 'none',
     '&:hover': {
-      boxShadow: 'none', 
+      boxShadow: 'none',
     },
   },
 }));
@@ -126,6 +148,46 @@ const Cohorts = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const cohorts = useSelector((state) => state.user.cohorts);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [popoverAnchorEl, setPopoverAnchorEl] = useState(null); // State for popover anchor
+  const openPopover = Boolean(popoverAnchorEl);
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  // Function to open popover
+  const handlePopoverOpen = (event) => {
+    setPopoverAnchorEl(event.currentTarget);
+  };
+
+  // Function to close popover
+  const handlePopoverClose = () => {
+    setPopoverAnchorEl(null);
+  };
+
+  // Function to handle options from popover
+  const handleOptionClick = (option) => {
+    // Implement actions based on selected option
+    switch (option) {
+      case 'Publish Poll':
+        // Implement logic for publishing a poll
+        break;
+      case 'Schedule Event':
+        // Implement logic for scheduling an event
+        break;
+      case 'Make Announcement':
+        // Implement logic for making an announcement
+        break;
+      default:
+        break;
+    }
+    handlePopoverClose(); // Close the popover after handling the option
+  };
 
   const [cohortName, setCohortName] = useState('');
   const [description, setDescription] = useState('');
@@ -135,14 +197,14 @@ const Cohorts = () => {
   const [fileUploaded, setFileUploaded] = useState(null);
   const [isFormValid, setIsFormValid] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
 
-  const handleOpen = () => setOpen(true);
+  const handleOpenModal = () => setOpenModal(true);
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleCloseModal = () => {
+    setOpenModal(false);
     resetForm();
   };
 
@@ -178,7 +240,7 @@ const Cohorts = () => {
     } else {
       dispatch(createCohort(newCohort));
     }
-    handleClose();
+    handleCloseModal();
   };
 
   const handleEdit = (index) => {
@@ -191,7 +253,7 @@ const Cohorts = () => {
     setFileUploaded(cohort.fileUploaded);
     setEditIndex(index);
     setIsEditMode(true);
-    handleOpen();
+    handleOpenModal();
   };
 
   const handleDelete = (index) => {
@@ -204,7 +266,7 @@ const Cohorts = () => {
       setEndDate(null);
     }
   };
-  
+
   const handleEndDateChange = (date) => {
     setEndDate(date);
   };
@@ -217,7 +279,7 @@ const Cohorts = () => {
         <CardContent className={classes.cardcover}>
           <div className={classes.firstChild}>
             {cohort.fileUploaded ? (
-              <img src={cohort.fileUploaded} alt='cohort image' style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '50%' }} />
+              <img src={cohort.fileUploaded} alt='cohort image' style={{ width: '60px', height: '60px', objectFit: 'cover',}} />
             ) : (
               <div style={{ width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f0f0f0', borderRadius: '50%' }}>
                 <ImageIcon style={{ fontSize: 30, color: '#9e9e9e' }} />
@@ -242,7 +304,6 @@ const Cohorts = () => {
       </Card>
     ));
   };
-  
 
   return (
     <div>
@@ -256,19 +317,108 @@ const Cohorts = () => {
           <div>
             <div className={classes.list}>
               <div className={classes.firstRow}>
-                <Typography variant='h6' style={{ color: "#0A2240" }}>Your Programs</Typography>
-                <div className={classes.find}>
-                  <Search />
-                  <InputBase placeholder='Search' onChange={(e) => setSearchQuery(e.target.value)} />
+                <div>
+                <Container className={classes.cover}>
+        <div className={classes.home}>
+          <div className={classes.home1} >
+            <Button >
+              <img src='src/assets/users.png' alt='doubleusers' className={classes.image}/>
+              <Link to={"/cohorts"}>
+              <img src='src/assets/Cohorts.png' alt='cohorts' className={classes.title1}/>
+              </Link>
+            </Button>
+              
+          </div>
+        <div className={classes.home}>
+        <Button>
+          <img src='src/assets/book-open.png' alt='openBook' className={classes.image}/>
+          
+          <img src='src/assets/Programs.png' alt='programs' className={classes.title}/>
+        </Button>
+      </div>
+      <div className={classes.home}>
+        <Button>
+          <img src='src/assets/briefcase.png' alt='briefCase' className={classes.image}/>
+          <img src='src/assets/Label.png' alt='instructors' className={classes.title}/>
+        </Button>
+      </div>
+      <div className={classes.home}>
+        <Button>
+          <img src='src/assets/user.png' alt='user' className={classes.image}/>
+          <img src='src/assets/Label (1).png' alt='learner' className={classes.title}/>
+        </Button>
+      </div>
+     </div>
+    </Container>
                 </div>
-                <Button variant='contained' className={classes.createCohortButton} onClick={handleOpen}>Create Cohort</Button>
+                <div style={{display:'flex',marginTop:"2.5%",gap:450,justifyContent:'space-evenly'}}>
+                  
+                
+                <div style={{flexDirection:'column'}}>
+                <div>
+                      <Typography
+                      sx={{fontSize:20,
+                      fontWeight:550,
+                      fontFamily:"fantasy"}}
+                      >Cohorts</Typography> 
+                  </div>
+
+                
+                
+                <div className={classes.find}>
+                  
+                  
+                    <Search />
+                    <InputBase placeholder='Search' onChange={(e) => setSearchQuery(e.target.value)} />
+                  
+                 
+                </div>
+                </div>
+                <div style={{display:'flex',gap:10,marginTop:"10%"}}>
+                  <div>
+                    <Button variant='contained' sx={{borderRadius:2,textTransform:'none'}} className={classes.createCohortButton} onClick={handleOpenModal}>Create Cohort</Button>
+                  </div>
+                  <div>
+                      <Button
+                      variant='outlined'
+                      sx={{ textTransform:'none', width: 200, height: 50, borderRadius: 2, color: "black" }}
+                      onClick={handleMenuOpen}
+                      >
+                      More Actions
+                      <MoreVertIcon sx={{ paddingLeft: 2 }} />
+                    </Button>
+
+                  </div>
+
+                </div>
+                </div>
+                
+                
+                {/* Popover for More Actions */}
+                <Popover
+                  open={Boolean(anchorEl)}
+                  anchorEl={anchorEl}
+                  onClose={handleMenuClose}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}
+                >
+                  <MenuItem onClick={() => handleOptionClick('Publish Poll')}>Publish a poll</MenuItem>
+                  <MenuItem onClick={() => handleOptionClick('Schedule Event')}>Schedule an event</MenuItem>
+                  <MenuItem onClick={() => handleOptionClick('Make Announcement')}>Make an announcement</MenuItem>
+                </Popover>
               </div>
               <div>{renderCohorts()}</div>
             </div>
           </div>
         </div>
       </div>
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={openModal} onClose={handleCloseModal}>
         <Container
           sx={{
             position: 'absolute',
@@ -285,7 +435,7 @@ const Cohorts = () => {
             <Typography sx={{ fontFamily: "inherit", fontWeight: 600, fontSize: 20 }}>
               {isEditMode ? 'Edit Cohort' : 'Create a Cohort'}
             </Typography>
-            <button onClick={handleClose} style={{ border: "none", backgroundColor: "transparent", cursor: "pointer" }}>
+            <button onClick={handleCloseModal} style={{ border: "none", backgroundColor: "transparent", cursor: "pointer" }}>
               <img src='src/assets/x.png' alt='x' />
             </button>
           </div>
@@ -334,7 +484,7 @@ const Cohorts = () => {
               <DragDrop onFileUpload={setFileUploaded} />
             </div>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Button variant="outlined" onClick={handleClose}>Cancel</Button>
+              <Button variant="outlined" onClick={handleCloseModal}>Cancel</Button>
               <Button variant="contained" disabled={!isFormValid} type="submit" sx={{ marginLeft: 2 }}>
                 {isEditMode ? 'Update Cohort' : 'Create Cohort'}
               </Button>
@@ -347,3 +497,4 @@ const Cohorts = () => {
 };
 
 export default Cohorts;
+
