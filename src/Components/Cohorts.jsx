@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   find: {
     display: 'flex',
     alignItems: 'center',
-    marginTop:theme.spacing(10),
+    marginTop:theme.spacing(6),
     position: 'relative',
     borderRadius: 10,
     borderStyle: 'solid',
@@ -72,9 +72,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   firstRow: {
-    display: 'flex',
-    gap: 350,
-    paddingBottom: theme.spacing(6),
+    
+    
+    
   },
   close: {
     display: 'flex',
@@ -87,16 +87,11 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     paddingBottom: theme.spacing(4),
   },
-  cardcover: {
-    display: 'flex',
-    justifyContent:'space-between'
-    
-    
-  },
+  
   firstChild: {
     display: 'flex',
     gap: 20,
-    marginLeft:'20%'
+    
   },
   secondChild: {
     display: 'flex',
@@ -149,7 +144,7 @@ const Cohorts = () => {
   const dispatch = useDispatch();
   const cohorts = useSelector((state) => state.user.cohorts);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [popoverAnchorEl, setPopoverAnchorEl] = useState(null); // State for popover anchor
+  const [popoverAnchorEl, setPopoverAnchorEl] = useState(null);
   const openPopover = Boolean(popoverAnchorEl);
 
   const handleMenuOpen = (event) => {
@@ -160,33 +155,33 @@ const Cohorts = () => {
     setAnchorEl(null);
   };
 
-  // Function to open popover
+ 
   const handlePopoverOpen = (event) => {
     setPopoverAnchorEl(event.currentTarget);
   };
 
-  // Function to close popover
+ 
   const handlePopoverClose = () => {
     setPopoverAnchorEl(null);
   };
 
-  // Function to handle options from popover
+  
   const handleOptionClick = (option) => {
-    // Implement actions based on selected option
+   
     switch (option) {
       case 'Publish Poll':
-        // Implement logic for publishing a poll
+       
         break;
       case 'Schedule Event':
-        // Implement logic for scheduling an event
+       
         break;
       case 'Make Announcement':
-        // Implement logic for making an announcement
+        
         break;
       default:
         break;
     }
-    handlePopoverClose(); // Close the popover after handling the option
+    handlePopoverClose(); 
   };
 
   const [cohortName, setCohortName] = useState('');
@@ -276,7 +271,7 @@ const Cohorts = () => {
   const renderCohorts = () => {
     return filteredCohorts.map((cohort, index) => (
       <Card key={index} sx={{ marginBottom: 4, boxShadow: "0 8px 16px 0px rgba(240, 249, 255, 0.5)", borderRadius: "8px", border: "1px #F6FCFF" }}>
-        <CardContent className={classes.cardcover}>
+        <CardContent sx={{display:'flex',justifyContent:'space-around' }}>
           <div className={classes.firstChild}>
             {cohort.fileUploaded ? (
               <img src={cohort.fileUploaded} alt='cohort image' style={{ width: '60px', height: '60px', objectFit: 'cover',}} />
@@ -317,7 +312,8 @@ const Cohorts = () => {
           <div>
             <div className={classes.list}>
               <div className={classes.firstRow}>
-                <div>
+                <div style={{display:'flex',gap:"70%"}}>
+                <div style={{display:'flex',gap:'20%'}}>
                 <Container className={classes.cover}>
         <div className={classes.home}>
           <div className={classes.home1} >
@@ -350,31 +346,31 @@ const Cohorts = () => {
       </div>
      </div>
     </Container>
-                </div>
-                <div style={{display:'flex',marginTop:"2.5%",gap:450,justifyContent:'space-evenly'}}>
-                  
-                
-                <div style={{flexDirection:'column'}}>
-                <div>
-                      <Typography
-                      sx={{fontSize:20,
-                      fontWeight:550,
-                      fontFamily:"fantasy"}}
-                      >Cohorts</Typography> 
-                  </div>
+    <div style={{marginTop:'45px'}} >
+            <div>
+            <Typography
+               sx={{fontSize:20,
+               fontWeight:550,
+               fontFamily:"fantasy"}}
+              >Cohorts</Typography>
+            
+              </div>    
+    
+    
+          <div className={classes.find}>
+            
 
+            <Search />
+            <InputBase placeholder='Search' onChange={(e) => setSearchQuery(e.target.value)} />
+            
+           
+          </div>
+          </div>
+                </div>
                 
                 
-                <div className={classes.find}>
-                  
-                  
-                    <Search />
-                    <InputBase placeholder='Search' onChange={(e) => setSearchQuery(e.target.value)} />
-                  
-                 
-                </div>
-                </div>
-                <div style={{display:'flex',gap:10,marginTop:"10%"}}>
+               
+                <div style={{display:'flex',gap:10,marginTop:"12%"}}>
                   <div>
                     <Button variant='contained' sx={{borderRadius:2,textTransform:'none'}} className={classes.createCohortButton} onClick={handleOpenModal}>Create Cohort</Button>
                   </div>
@@ -392,6 +388,7 @@ const Cohorts = () => {
 
                 </div>
                 </div>
+                
                 
                 
                 {/* Popover for More Actions */}
@@ -413,10 +410,14 @@ const Cohorts = () => {
                   <MenuItem onClick={() => handleOptionClick('Make Announcement')}>Make an announcement</MenuItem>
                 </Popover>
               </div>
-              <div>{renderCohorts()}</div>
+             
             </div>
+            
           </div>
+          
         </div>
+        {renderCohorts()}
+        
       </div>
       <Modal open={openModal} onClose={handleCloseModal}>
         <Container
